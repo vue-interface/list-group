@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>ListGroup</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="./dist/ListGroup.css">
+    </head>
+    <body>
+        <div id="app" class="container">
+            <h1 class="mb-5">list-group</h1>
+
+            <h3>Basic List Group</h3>
+
+            <list-group>
+                <li>List Item #1</li>
+                <li>List Item #2</li>
+                <li>List Item #3</li>
+            </list-group>
+
+            <hr class="mt-5">
+
+            <h3 class="mt-5">Active Items</h3>
+
+            <list-group>
+                <div :active="!example1" @click="example1 = 0">List Item #1</div>
+                <div :active="example1 == 1" @click="example1 = 1">List Item #2</div>
+                <div :active="example1 == 2" @click="example1 = 2">List Item #3</div>
+            </list-group>
+
+            <hr class="mt-5">
+
+            <h3 class="mt-5">Disabled Items</h3>
+
+            <list-group>
+                <div :disabled="!example1" @click="example1 = 0">List Item #1</div>
+                <div :disabled="example1 == 1" @click="example1 = 1">List Item #2</div>
+                <div :disabled="example1 == 2" @click="example1 = 2">List Item #3</div>
+            </list-group>
+
+            <hr class="mt-5">
+
+            <h3 class="mt-5">Action Items</h3>
+
+            <list-group>
+                <a class="list-group-item list-group-item-action active" aria-current="true">
+                  Cras justo odio
+                </a>
+                <button>Dapibus ac facilisis in</button>
+                <a>Morbi leo risus</a>
+                <a>Porta ac consectetur ac</a>
+                <a disabled tabindex="-1">Vestibulum at eros</a>
+            </list-group>
+
+            <hr class="mt-5">
+
+            <h3 class="mt-5">Contextual List Group</h3>
+
+            <list-group>
+                <router-link to="/" variant="primary">Primary</router-link>
+                <div action variant="secondary">Secondary</div>
+                <a variant="success">Success</a>
+                <a variant="danger">Danger</a>
+                <a variant="warning">Warning</a>
+                <a variant="info">Info</a>
+                <a variant="light">Light</a>
+                <a variant="dark">Dark</a>
+            </list-group>
+            
+            <!--
+            <hr class="mt-5">
+
+            <h3 class="mt-5">Clickable Contextual List Group</h3>
+
+            <list-group activateable>
+                <div variant="primary" action>Primary</div>
+                <div variant="secondary" action>Secondary</div>
+                <div variant="success" action>Success</div>
+                <div variant="danger" action>Danger</div>
+                <div variant="warning" action>Warning</div>
+                <div variant="info" action>Info</div>
+                <div variant="light" action>Light</div>
+                <div variant="dark" action>Dark</div>
+            </list-group>
+
+            <hr class="mt-5">
+
+            <h3 class="mt-5">Custom Content</h3>
+
+            <list-group activateable>
+                <div class="flex-column align-items-start" action>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                </div>
+                <div class="flex-column align-items-start" action>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                </div>
+                <div class="flex-column align-items-start" action>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5>
+                        <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                </div>
+            </list-group>
+            -->
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+        <script type="text/javascript" src="./dist/ListGroup.umd.js"></script>
+        <script type="text/javascript">
+            Vue.use(VueRouter);
+
+            const router = new VueRouter({
+                routes: [{
+                    path: '/test',
+                    name: 'Home'
+                }]
+            });
+
+            const vue = new Vue({
+                router,
+                el: '#app',
+                components: {
+                    ListGroup
+                },
+                data: () => ({
+                    example1: null
+                })
+            });
+        </script>
+    </body>
+</html>
