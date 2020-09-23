@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import Shadowable from '@vue-interface/shadowable';
 import ListGroupItems from './ListGroupItems';
 
 export default {
@@ -14,6 +15,10 @@ export default {
     components: {
         ListGroupItems
     },
+
+    mixins: [
+        Shadowable
+    ],
 
     props: {
 
@@ -33,6 +38,7 @@ export default {
         classes() {
             return {
                 'list-group-flush': this.flush,
+                [this.shadowableClass]: !!this.shadow,
             };
         }
     }

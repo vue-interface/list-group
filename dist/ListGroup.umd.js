@@ -1095,6 +1095,22 @@ module.exports = [
 
 /***/ }),
 
+/***/ "7a82":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__("23e7");
+var DESCRIPTORS = __webpack_require__("83ab");
+var objectDefinePropertyModile = __webpack_require__("9bf2");
+
+// `Object.defineProperty` method
+// https://tc39.github.io/ecma262/#sec-object.defineproperty
+$({ target: 'Object', stat: true, forced: !DESCRIPTORS, sham: !DESCRIPTORS }, {
+  defineProperty: objectDefinePropertyModile.f
+});
+
+
+/***/ }),
+
 /***/ "7b0b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2273,37 +2289,32 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/css/ListGroup.css
 var ListGroup = __webpack_require__("a0dc");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"b39094ae-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/ListGroup.vue?vue&type=template&id=a5e89fba&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44354f81-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/ListGroup.vue?vue&type=template&id=25f6e722&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"list-group",class:_vm.classes},[_c('list-group-items',[_vm._t("default")],2)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/ListGroup.vue?vue&type=template&id=a5e89fba&
+// CONCATENATED MODULE: ./src/ListGroup.vue?vue&type=template&id=25f6e722&
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
-var es_array_concat = __webpack_require__("99af");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.define-property.js
+var es_object_define_property = __webpack_require__("7a82");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__("4de4");
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
-var es_array_for_each = __webpack_require__("4160");
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
-var es_object_assign = __webpack_require__("cca6");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__("ac1f");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__("5319");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
-var es_string_trim = __webpack_require__("498a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
-var web_dom_collections_for_each = __webpack_require__("159b");
-
+  return obj;
+}
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/camelCase.js
 function camelCase(string) {
     if(!string) {
@@ -2631,6 +2642,75 @@ function transition(el, defaultValue) {
 
 
 
+// CONCATENATED MODULE: ./node_modules/@vue-interface/shadowable/index.js
+
+
+/* harmony default export */ var shadowable = ({
+
+    props: {
+
+        /**
+         * The shadow size.
+         *
+         * @property {Boolean|String}
+         */
+        shadow: {
+            type: [Boolean, String],
+            validate(value) {
+                return value === true || [
+                    'shadow-sm',
+                    'shadow-lg'
+                ].indexOf(prefix_prefix(value, this.shadowableClassPrefix)) !== -1;
+            }
+        },
+        
+        /**
+         * The shadow class prefix.
+         *
+         * @property {String}
+         */
+        shadowableClassPrefix: {
+            type: String,
+            default: 'shadow'
+        }
+    },
+
+    computed: {
+
+        shadowableClass() {
+            return this.shadow === true
+                ? this.shadowableClassPrefix
+                : prefix_prefix(this.shadow, this.shadowableClassPrefix);
+        }
+
+    }
+
+});
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
+var es_array_filter = __webpack_require__("4de4");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
+var es_array_for_each = __webpack_require__("4160");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
+var es_object_assign = __webpack_require__("cca6");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__("ac1f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
+var es_string_replace = __webpack_require__("5319");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
+var es_string_trim = __webpack_require__("498a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
+var web_dom_collections_for_each = __webpack_require__("159b");
+
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/ListGroupItems.vue?vue&type=script&lang=js&
 
 
@@ -2836,6 +2916,7 @@ var component = normalizeComponent(
 
 /* harmony default export */ var ListGroupItems = (component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/ListGroup.vue?vue&type=script&lang=js&
+
 //
 //
 //
@@ -2845,10 +2926,12 @@ var component = normalizeComponent(
 //
 //
 
+
 /* harmony default export */ var ListGroupvue_type_script_lang_js_ = ({
   components: {
     ListGroupItems: ListGroupItems
   },
+  mixins: [shadowable],
   props: {
     /**
      * The list group appear flush (without some borders).
@@ -2862,9 +2945,9 @@ var component = normalizeComponent(
   },
   computed: {
     classes: function classes() {
-      return {
+      return _defineProperty({
         'list-group-flush': this.flush
-      };
+      }, this.shadowableClass, !!this.shadow);
     }
   }
 });
