@@ -2289,7 +2289,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/css/ListGroup.css
 var ListGroup = __webpack_require__("a0dc");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44354f81-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/ListGroup.vue?vue&type=template&id=25f6e722&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7840be91-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/ListGroup.vue?vue&type=template&id=25f6e722&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"list-group",class:_vm.classes},[_c('list-group-items',[_vm._t("default")],2)],1)}
 var staticRenderFns = []
 
@@ -2739,7 +2739,17 @@ function wrap(wrapper, fn) {
 }
 
 function listener(vnode, key) {
-  return vnode.data.on[key] || vnode.componentOptions && vnode.componentOptions.listeners && vnode.componentOptions.listeners[key];
+  return vnode.data && vnode.data.on && vnode.data.on[key];
+}
+
+function prop(vnode, key) {
+  var attr = vnode.data && vnode.data.attrs && vnode.data.attrs[key];
+
+  if (attr === '' || !!attr) {
+    return attr;
+  }
+
+  return vnode.componentOptions && vnode.componentOptions.propsData && vnode.componentOptions.propsData[key];
 }
 
 /* harmony default export */ var ListGroupItemsvue_type_script_lang_js_ = ({
@@ -2770,24 +2780,24 @@ function listener(vnode, key) {
         context.parent.$emit('blur-item', e, vnode);
       }, listener(vnode, 'blur'));
 
-      if (vnode.data.attrs && vnode.data.attrs.active) {
+      if (vnode.data.attrs && prop(vnode, 'active')) {
         appendClass(vnode, 'active');
       }
 
-      if (vnode.data.attrs && vnode.data.attrs.disabled) {
+      if (vnode.data.attrs && prop(vnode, 'disabled')) {
         appendClass(vnode, 'disabled');
       }
 
       appendClass(vnode, 'list-group-item');
-      var isAction = vnode.data.attrs.action === '' || !!vnode.data.attrs.action || vnode.componentOptions && vnode.componentOptions.propsData.action;
+      var isAction = prop(vnode, 'action') === '' || !!prop(vnode, 'action');
 
       if (isAction || vnode.tag === 'a' || vnode.tag === 'button' || vnode.componentOptions && vnode.componentOptions.tag === 'router-link') {
         vnode.data.attrs['href'] = vnode.data.attrs['href'] || '#';
         appendClass(vnode, 'list-group-item-action');
       }
 
-      if (vnode.data.attrs && vnode.data.attrs.variant) {
-        appendClass(vnode, "list-group-item-".concat(vnode.data.attrs.variant));
+      if (vnode.data.attrs && prop(vnode, 'variant')) {
+        appendClass(vnode, "list-group-item-".concat(prop(vnode, 'variant')));
       }
     });
     return context.children;

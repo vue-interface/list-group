@@ -18,11 +18,19 @@ function wrap(wrapper, fn) {
 }
 
 function listener(vnode, key) {
-    return vnode.data.on[key] || (
-        vnode.componentOptions &&
-        vnode.componentOptions.listeners &&
-        vnode.componentOptions.listeners[key]
-    );
+    return vnode.data && vnode.data.on && vnode.data.on[key];
+}
+
+function prop(vnode, key) {
+    const attr = vnode.data && vnode.data.attrs && vnode.data.attrs[key];
+
+    if(attr === '' || !!attr) {
+        return attr;
+    }
+
+    return vnode.componentOptions
+        && vnode.componentOptions.propsData
+        && vnode.componentOptions.propsData[key];
 }
 
 export default {
@@ -40,6 +48,7 @@ export default {
                 if(!vnode.data.on) {
                     vnode.data.on = {};
                 }
+                
                 vnode.data.on.click = wrap(e => {
                     context.parent.$emit('click-item', e, vnode);
                 }, listener(vnode, 'click'));
@@ -52,17 +61,17 @@ export default {
                     context.parent.$emit('blur-item', e, vnode);
                 }, listener(vnode, 'blur'));
 
-                if(vnode.data.attrs && vnode.data.attrs.active) {
+                if(vnode.data.attrs && prop(vnode, 'active')) {
                     appendClass(vnode, 'active');
                 }
 
-                if(vnode.data.attrs && vnode.data.attrs.disabled) {
+                if(vnode.data.attrs && prop(vnode, 'disabled')) {
                     appendClass(vnode, 'disabled');
                 }
 
                 appendClass(vnode, 'list-group-item');
 
-                const isAction = vnode.data.attrs.action === '' || !!vnode.data.attrs.action || vnode.componentOptions && vnode.componentOptions.propsData.action;
+                const isAction = prop(vnode, 'action') === '' || !!prop(vnode, 'action');
 
                 if(isAction || vnode.tag === 'a' || vnode.tag === 'button' || (vnode.componentOptions && vnode.componentOptions.tag === 'router-link')) {
                     vnode.data.attrs['href'] = vnode.data.attrs['href'] || '#';
@@ -70,8 +79,8 @@ export default {
                     appendClass(vnode, 'list-group-item-action');
                 }
 
-                if(vnode.data.attrs && vnode.data.attrs.variant) {
-                    appendClass(vnode, `list-group-item-${vnode.data.attrs.variant}`);
+                if(vnode.data.attrs && prop(vnode, 'variant')) {
+                    appendClass(vnode, `list-group-item-${prop(vnode, 'variant')}`);
                 }
             });
 
