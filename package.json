@@ -1,6 +1,6 @@
 {
   "name": "@vue-interface/list-group",
-  "version": "0.9.4",
+  "version": "0.10.0",
   "description": "A Vue list group component.",
   "files": [
     "index.js",
