@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Shadowable from '@vue-interface/shadowable';
-import ListGroupItems from './ListGroupItems';
+import { Shadowable } from '@vue-interface/shadowable';
+import ListGroupItems from './ListGroupItems.vue';
 
 export default {
 

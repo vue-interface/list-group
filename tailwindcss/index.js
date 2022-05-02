@@ -1,33 +1,62 @@
 const plugin = require('tailwindcss/plugin');
-const { breakpoints, darken, colorLevel, rgba } = require('@vue-interface/tailwindcss');
-const { colors } = require('tailwindcss/defaultTheme');
-const defaultVariations = require('@vue-interface/variant/tailwindcss/defaultVariations');
+const Color = require('color');
+const colors = require('tailwindcss/colors');
+const variations = require('@vue-interface/variant/tailwindcss/variations');
+
+function textColor(backgroundColor, color) {
+    color = Color(color);
+
+    if(Color(backgroundColor).isDark()) {
+        return color.lighten(.66).hex();
+    }
+
+    return color.darken(.66).hex();
+}
+
+function bgColor(color, level) {
+    color = Color(color);
+
+    if(color.luminosity() > .9) {
+        return color.hex();
+    }
+
+    return color.lightness(level).hex();
+}
+
+// function activeColor(color, level) {
+//     color = Color(color);
+
+//     return color.hex();
+// }
+
 
 module.exports = plugin(function({ addComponents, theme }) {
-    function variant(state, backgroundColor, color) {
+
+    function variant(key, color) {
+        const backgroundColor = bgColor(color, theme('listGroup.item.level.lightness'));
+        
+        color = textColor(backgroundColor, color);
+
         Object.assign(listGroup, {
-            [`.list-group-item-${state}`]: {
-                color,
+            [`.list-group-item-${key}`]: {
                 backgroundColor,
-            },
-
-            [`.list-group-item-${state}.list-group-item-action:hover, .list-group-item-${state}.list-group-item-action:focus`]: {
                 color,
-                backgroundColor: darken(backgroundColor, .05)
             },
 
-            [`.list-group-item-${state}.list-group-item-action.active`]: {
+            [`.list-group-item-${key}.list-group-item-action:hover, .list-group-item-${key}.list-group-item-action:focus`]: {
+                color,
+                backgroundColor: Color(backgroundColor).darken(.1).desaturate(.25).hex()
+            },
+
+            [`.list-group-item-${key}.list-group-item-action.active`]: {
                 color: theme('colors.white', colors.white),
-                backgroundColor: color,
-                borderColor: color,
+                backgroundColor: Color(color).lighten(.66).hex(),
+                borderColor: Color(color).lighten(.66).hex(),
             }
         });
     }
   
     const listGroup = {
-        ':root': {
-            
-        },
         
         // Base class
         //
@@ -116,51 +145,8 @@ module.exports = plugin(function({ addComponents, theme }) {
             borderTopWidth: theme('listGroup.borderWidth')
         }
     };
-
-    // Horizontal
-    //
-    // Change the layout of list group items from vertical (default) to horizontal.
-    
-    const breaks = breakpoints(theme('screens'));
-
-    breaks.sortMin().forEach(([key, breakpoint]) => {
-        const selector = breaks.infix('.list-group-horizontal', key);
-
-        Object.assign(listGroup, {
-            [`@media only screen (min-width: ${breakpoint.min()})`]: {
-                [selector]: {
-                    flexDirection: 'row'
-                },
-
-                [`${selector} > .list-group-item:first-child`]: {
-                    borderBottomLeftRadius: theme('listGroup.borderRadius'),
-                    borderTopRightRadius: 0
-                },
-
-                [`${selector} > .list-group-item:last-child`]: {
-                    borderTopRightRadius: theme('listGroup.borderRadius'),
-                    borderTopRightRadius: 0
-                },
-
-                [`${selector} > .list-group-item.active`]: {
-                    marginTop: 0
-                },
-
-                [`${selector} + .list-group-item`]: {
-                    borderTopWidth: theme('listGroup.borderWidth'),
-                    borderLeftWidth: 0,
-                },
-
-                [`${selector} + .list-group-item.active`]: {
-                    marginleft: `-${theme('listGroup.borderWidth')}`,
-                    borderLeftWidth: theme('listGroup.borderWidth')
-                }
-            }
-        });
-    });
     
     Object.assign(listGroup, {
-
         // Flush list items
         //
         // Remove borders and border-radius to keep list group items edge-to-edge. Most
@@ -174,15 +160,15 @@ module.exports = plugin(function({ addComponents, theme }) {
             borderWidth: `0 0 ${theme('listGroup.borderWidth')}`
         },
         
-        '.list-group-flush:last-child': {
+        '.list-group-flush > .list-group-item:last-child': {
             borderBottomWidth: 0
         }
 
     });
     
-    Object.entries(theme('variations', defaultVariations))
+    Object.entries(theme('variations', variations))
         .forEach(([key, value]) => {
-            variant(key, colorLevel(value, theme('listGroup.item.level.backgroundColor')), colorLevel(value, theme('listGroup.item.level.color')));
+            variant(key, value);
         });
     
     addComponents(listGroup);
@@ -190,7 +176,7 @@ module.exports = plugin(function({ addComponents, theme }) {
     theme: {
         listGroup: theme => ({
             backgroundColor: theme('colors.white', colors.white),
-            borderColor: rgba(theme('colors.black', colors.black), .125),
+            borderColor: Color(theme('colors.black', colors.black)).fade(.885),
             borderWidth: '1px',
             borderRadius: '.25rem',
             textDecoration: 'none',
@@ -199,30 +185,30 @@ module.exports = plugin(function({ addComponents, theme }) {
                 paddingX: '1rem',
                 level: {
                     color: 6,
-                    backgroundColor: -5,
+                    lightness: 88.5,
                 }
             },
             hover: {
-                color: theme('colors.gray.700', colors.gray[700]),
-                backgroundColor: theme('colors.gray.100', colors.gray[100])
+                color: theme('colors.gray.700', colors.gray['700']),
+                backgroundColor: theme('colors.gray.100', colors.gray['100'])
             },
             active: {
                 color: theme('colors.white', colors.white),
-                backgroundColor: theme('variations.primary', defaultVariations.primary),
-                borderColor: theme('variations.primary', defaultVariations.primary),
+                backgroundColor: theme('variations.primary', variations.primary),
+                borderColor: theme('variations.primary', variations.primary),
             },
             disabled: {
-                color: theme('colors.gray.600', colors.gray[600]),
+                color: theme('colors.gray.500', colors.gray['500']),
                 backgroundColor: theme('colors.white', colors.white),
             },
             action: {
-                color: theme('colors.gray.700', colors.gray[700]),
+                color: theme('colors.gray.700', colors.gray['700']),
                 active: {
-                    color: theme('colors.gray.900', colors.gray[900]),
-                    backgroundColor: theme('colors.gray.200', colors.gray[200]),
+                    color: theme('colors.gray.900', colors.gray['900']),
+                    backgroundColor: theme('colors.gray.200', colors.gray['200']),
                 },
                 hover: {
-                    color: theme('colors.gray.700', colors.gray[700]),
+                    color: theme('colors.gray.700', colors.gray['700']),
                 }
             }
         })

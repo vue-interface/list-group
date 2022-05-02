@@ -1,6 +1,4 @@
 <script>
-import { isUndefined } from '@vue-interface/utils';
-
 function appendClass(vnode, str) {
     vnode.data.staticClass = `${vnode.data.staticClass && vnode.data.staticClass.replace(str, '') || ''} ${str}`.trim();  
 }
@@ -24,7 +22,11 @@ function listener(vnode, key) {
 function prop(vnode, key) {
     const attr = vnode.data && vnode.data.attrs && vnode.data.attrs[key];
 
-    if(attr === '' || !!attr) {
+    if(attr === '') {
+        return true;
+    }
+
+    if(!!attr) {
         return attr;
     }
 

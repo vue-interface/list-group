@@ -4,15 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>ListGroup</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap-reboot.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap-grid.min.css">
-        <link rel="stylesheet" href="./dist/ListGroup.css">
     </head>
     <body>
-        <div id="app" class="container">
-            <h1 class="mb-5">list-group</h1>
+        <div id="app" class="container mx-auto mb-6">
+            <h1 class="text-4xl mb-6">list-group</h1>
 
-            <h3>Basic List Group</h3>
+            <h3 class="text-2xl mb-3">Basic List Group</h3>
 
             <list-group>
                 <li>List Item #1</li>
@@ -20,9 +17,9 @@
                 <li>List Item #3</li>
             </list-group>
 
-            <hr class="mt-5">
+            <hr class="my-6">
 
-            <h3 class="mt-5">Active Items</h3>
+            <h3 class="text-2xl mb-3">Active Items</h3>
 
             <list-group>
                 <div :active="!example1" @click="example1 = 0">List Item #1</div>
@@ -30,109 +27,98 @@
                 <div :active="example1 == 2" @click="example1 = 2">List Item #3</div>
             </list-group>
 
-            <hr class="mt-5">
+            <hr class="my-6">
 
-            <h3 class="mt-5">Disabled Items</h3>
+            <h3 class="text-2xl my-6">Disabled Items</h3>
 
             <list-group>
-                <div :disabled="!example1" @click="example1 = 0">List Item #1</div>
-                <div :disabled="example1 == 1" @click="example1 = 1">List Item #2</div>
-                <div :disabled="example1 == 2" @click="example1 = 2">List Item #3</div>
+                <div disabled>List Item #1</div>
+                <div disabled>List Item #2</div>
+                <div>List Item #3</div>
             </list-group>
 
-            <hr class="mt-5">
+            <hr class="my-6">
 
-            <h3 class="mt-5">Action Items</h3>
+            <h3 class="text-2xl my-6">Action Items</h3>
 
             <list-group>
-                <a class="list-group-item list-group-item-action active" aria-current="true">
+                <button class="list-group-item list-group-item-action active" aria-current="true">
                   Cras justo odio
-                </a>
+                </button>
                 <button>Dapibus ac facilisis in</button>
-                <a>Morbi leo risus</a>
-                <a>Porta ac consectetur ac</a>
-                <a disabled tabindex="-1">Vestibulum at eros</a>
+                <button>Morbi leo risus</button>
+                <button>Porta ac consectetur ac</button>
+                <button disabled tabindex="-1">Vestibulum at eros</button>
             </list-group>
 
-            <hr class="mt-5">
+            <hr class="my-6">
 
-            <h3 class="mt-5">Contextual List Group</h3>
+            <h3 class="text-2xl my-6">Flush</h3>
+
+            <list-group flush>
+                <li>List Item #1</li>
+                <li>List Item #2</li>
+                <li>List Item #3</li>
+            </list-group>
+
+            <hr class="my-6">
+
+            <h3 class="text-2xl my-6">Contextual List Group</h3>
 
             <list-group>
-                <router-link to="/" variant="primary">Primary</router-link>
-                <div action variant="secondary">Secondary</div>
-                <a variant="success">Success</a>
-                <a variant="danger">Danger</a>
-                <a variant="warning">Warning</a>
-                <a variant="info">Info</a>
-                <a variant="light">Light</a>
-                <a variant="dark">Dark</a>
-            </list-group>
-            
-            <!--
-            <hr class="mt-5">
-
-            <h3 class="mt-5">Clickable Contextual List Group</h3>
-
-            <list-group activateable>
-                <div variant="primary" action>Primary</div>
-                <div variant="secondary" action>Secondary</div>
-                <div variant="success" action>Success</div>
-                <div variant="danger" action>Danger</div>
-                <div variant="warning" action>Warning</div>
-                <div variant="info" action>Info</div>
-                <div variant="light" action>Light</div>
-                <div variant="dark" action>Dark</div>
+                <div>Default variant</div>
+                <div variant="primary">Primary</div>
+                <div variant="secondary">Secondary</div>
+                <div variant="success">Success</div>
+                <div variant="danger">Danger</div>
+                <div variant="warning">Warning</div>
+                <div variant="info">Info</div>
+                <div variant="light">Light</div>
+                <div variant="dark">Dark</div>
             </list-group>
 
-            <hr class="mt-5">
+            <hr class="my-6">
 
-            <h3 class="mt-5">Custom Content</h3>
+            <h3 class="text-2xl my-6">Contextual Action Items</h3>
 
-            <list-group activateable>
-                <div class="flex-column align-items-start" action>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
-                </div>
-                <div class="flex-column align-items-start" action>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
-                </div>
-                <div class="flex-column align-items-start" action>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
-                </div>
+            <list-group>
+                <button>Default variant</button>
+                <button variant="primary">Primary</button>
+                <button variant="secondary">Secondary</button>
+                <button variant="success">Success</button>
+                <button variant="danger">Danger</button>
+                <button variant="warning">Warning</button>
+                <button variant="info">Info</button>
+                <button variant="light">Light</button>
+                <button variant="dark">Dark</button>
             </list-group>
-            -->
+
+            <hr class="my-6">
+
+            <h3 class="text-2xl my-6">Contextual Active Items</h3>
+
+            <list-group>
+                <button active>Default variant</button>
+                <button action variant="primary" active>Primary</button>
+                <button action variant="secondary" active>Secondary</button>
+                <button action variant="success" active>Success</button>
+                <button action variant="danger" active>Danger</button>
+                <button action variant="warning" active>Warning</button>
+                <button action variant="info" active>Info</button>
+                <button action variant="light" active>Light</button>
+                <button action variant="dark" active>Dark</button>
+            </list-group>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
-        <script type="text/javascript" src="./dist/ListGroup.umd.js"></script>
-        <script type="text/javascript">
-            Vue.use(VueRouter);
-
-            const router = new VueRouter({
-                routes: [{
-                    path: '/test',
-                    name: 'Home'
-                }]
-            });
+        <script type="module">
+            import './index.css';
+            import Vue from 'vue/dist/vue';
+            import { ListGroup } from './index.js';
+            
+            Vue.config.devtools = false;
+            Vue.config.productionTip = false;
 
             const vue = new Vue({
-                router,
                 el: '#app',
                 components: {
                     ListGroup
